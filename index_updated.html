@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ernteprotokoll Agrartechnik Uni Göttingen</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+
+<script>
+  function handleSubmit(e) { 
+
+    // verhindert refresh on button click
+    e.preventDefault();
+    // holt sich den eingegebenen Wert aus input field mit id 'sample1'
+    const datum = document.getElementById('sample1').value;
+    const start = document.getElementById('sample2').value;
+    const ende = document.getElementById('sample3').value;
+    const feld = document.getElementById('sample4').value;
+    const owner = document.getElementById('sample5').value;
+    const size = document.getElementById('sample6').value;
+    const fahrer = document.getElementById('sample7').value;
+    const beifahrer = document.getElementById('sample8').value;
+    const wetter = document.getElementById('sample9').value;
+    const sonstiges = document.getElementById('sample10').value;
+    const proben = document.getElementById('sample11').value;
+
+
+    // console.log(datum);
+    // console.log(start);
+    // console.log(ende);
+    // console.log(name);
+    // console.log(owner);
+    // console.log(size);
+    // console.log(fahrer);
+    // console.log(beifahrer);
+    // console.log(wetter);
+    // console.log(sonstiges);
+    // console.log(proben);
+
+
+
+    // Falls keine Angabe gemacht - bspw.: kein Datum -> datum == false ist true
+    // dann wird default string verwendet (Ausdruck nach : )
+    // Heißt ternary operator das Ganze
+    // (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator)
+
+    const defaultStrig = 'Keine Angabe gemacht'
+    const obj = {
+      'datum': datum? datum: defaultStrig,
+      'start': start? start: defaultStrig,
+      'ende': ende? ende: defaultStrig,
+      'feld': feld? feld: defaultStrig,
+      'owner': owner? owner: defaultStrig,
+      'size': size? size: defaultStrig,
+      'fahrer': fahrer? fahrer: defaultStrig,
+      'beifahrer': beifahrer? beifahrer: defaultStrig,
+      'wetter': wetter? wetter: defaultStrig,
+      'sonstiges': sonstiges? sonstiges: defaultStrig,
+      'proben': proben? proben: defaultStrig
+    }
+
+
+    // Example data
+    const dummy_data = {
+      "datum":"2023-05-22",
+      "start":"10:00",
+      "ende":"12:00",
+      "feld":"John Doe",
+      "owner":"Jane Smith",
+      "size":45.79,
+      "fahrer":"Driver 1",
+      "beifahrer":"Passenger 1",
+      "wetter":"Sunny",
+      "sonstiges":"Other details",
+      "proben":"Sample data"
+    };
+    
+    // POST request zu meinem Backend, in dem Email gesendet wird
+    // https://www.geeksforgeeks.org/javascript-fetch-method/
+
+    fetch("https://lawi-backend.vercel.app/submit/", {
+    // fetch("http://127.0.0.1:8000/submit/", {
+    method: 'post',
+    body: JSON.stringify(obj),
+    // body: JSON.stringify(dummy_data),
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    }).then((response) => {
+        console.log(response.status)
+        return response.json()
+    }).then((res) => {
+        console.log(res)
+    }).catch((error) => {
+        console.log(error)
+    });
+  };
+
+
+</script>
+
+
+<style>
+
+  .material-symbols-outlined {
+   font-variation-settings:
+   'FILL' 0,
+   'wght' 400,
+   'GRAD' 0,
+   'opsz' 48
+    }
+
+    .page-content{
+        padding: 100px 300px;
+    }
+
+  </style>
+
+</head>
+<body>
+<!-- Simple header with scrollable tabs. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">Ernteprotokoll Agrartechnik</span>
+      </div>
+      <!-- Tabs -->
+      <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+        <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Feld 1</a>
+        <a href="#scroll-tab-2" class="mdl-layout__tab">Feld 2</a>
+        <a href="#scroll-tab-3" class="mdl-layout__tab">Feld 3</a>
+        <a href="#scroll-tab-4" class="mdl-layout__tab">Feld 4</a>
+        <a href="#scroll-tab-5" class="mdl-layout__tab">Feld 5</a>
+        <a href="#scroll-tab-6" class="mdl-layout__tab">Feld 6</a>
+        <a href="#scroll-tab-2" class="mdl-layout__tab">Feld 7</a>
+        <a href="#scroll-tab-3" class="mdl-layout__tab">Feld 8</a>
+        <a href="#scroll-tab-4" class="mdl-layout__tab">Feld 9</a>
+        <a href="#scroll-tab-5" class="mdl-layout__tab">Feld 10</a>
+      </div>
+
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Ernteprotokoll Agrartechnik</span>
+    </div>
+
+    <main class="mdl-layout__content">
+      <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+        <div class="page-content">
+
+            <form id="form1" onsubmit="handleSubmit(event)">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample1">
+                  <label class="mdl-textfield__label" for="sample1">Datum </label>
+                </div> <span class="material-symbols-outlined">
+                  calendar_month
+                  </span> <br>
+             
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample2">
+                  <label class="mdl-textfield__label" for="sample2">Startzeit</label>
+                </div> <span class="material-symbols-outlined">
+                  schedule
+                  </span> <br>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample3">
+                  <label class="mdl-textfield__label" for="sample3">Endzeit</label>
+                </div> <span class="material-symbols-outlined">
+                  update
+                  </span> <br>
+
+<h3> Betriebsdaten</h3>
+            
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample4">
+                  <label class="mdl-textfield__label" for="sample4">Feldname </label>
+                </div> <span class="material-symbols-outlined">
+                  crop
+                  </span> <br>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample5">
+                  <label class="mdl-textfield__label" for="sample5">Feldbesitzer</label>
+                </div> <span class="material-symbols-outlined">
+                  person
+                  </span> <br>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample6">
+                <label class="mdl-textfield__label" for="sample6">Feldgröße in ha</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+                </div> <br>
+
+<h3>Fahrer</h3>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample7">
+                <label class="mdl-textfield__label" for="sample7">Fahrer</label>
+                </div> <span class="material-symbols-outlined">
+                  agriculture
+                  </span> <br>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample8">
+                <label class="mdl-textfield__label" for="sample8">Beifahrer</label>
+                </div> <span class="material-symbols-outlined">
+                  agriculture
+                  </span> <br>
+
+<h3>Bedingungen</h3>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample9">
+                <label class="mdl-textfield__label" for="sample9">Wetterbedingungen</label>
+                </div> <span class="material-symbols-outlined">
+                  partly_cloudy_day
+                  </span> <br>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample10" ></textarea>
+                <label class="mdl-textfield__label" for="sample10">Sonstiges</label>
+                </div> <br>
+  
+<h3>Proben</h3> 
+<p>Ort/Anzahl/Menge etc.</p>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample11" ></textarea>
+                <label class="mdl-textfield__label" for="sample11">Text einfügen</label>
+                </div> <span class="material-symbols-outlined">
+                  labs
+                  </span> <br>
+
+                <button id="button_submit_feld1" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                    Speichern
+                  </button>
+
+            </form>
+  
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+        <div class="page-content">
+            
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample21">
+                  <label class="mdl-textfield__label" for="sample21">Datum </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample22">
+                  <label class="mdl-textfield__label" for="sample22">Startzeit</label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample23">
+                  <label class="mdl-textfield__label" for="sample23">Endzeit</label>
+                </div>
+              </form>
+
+
+<h3> Betriebsdaten</h3>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample24">
+                  <label class="mdl-textfield__label" for="sample24">Feldname </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample25">
+                  <label class="mdl-textfield__label" for="sample25">Feldbesitzer</label>
+                </div>
+              </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample26">
+                <label class="mdl-textfield__label" for="sample26">Feldgröße in ha</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </form>
+
+<h3>Fahrer</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample27">
+                <label class="mdl-textfield__label" for="sample27">Fahrer</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample28">
+                <label class="mdl-textfield__label" for="sample28">Beifahrer</label>
+                </div>
+            </form>
+
+<h3>Bedingungen</h3> 
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample29">
+                <label class="mdl-textfield__label" for="sample29">Wetterbedingungen</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample30" ></textarea>
+                <label class="mdl-textfield__label" for="sample30">Sonstiges</label>
+                </div>
+            </form>
+
+<h3>Proben</h3> 
+<p>Ort/Anzahl/Menge etc.</p>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample12" ></textarea>
+                <label class="mdl-textfield__label" for="sample12">Text einfügen</label>
+                </div>
+            </form>
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+        <div class="page-content">
+            
+                        <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample31">
+                  <label class="mdl-textfield__label" for="sample31">Datum </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample32">
+                  <label class="mdl-textfield__label" for="sample32">Startzeit</label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample33">
+                  <label class="mdl-textfield__label" for="sample33">Endzeit</label>
+                </div>
+              </form>
+
+
+<h3> Betriebsdaten</h3>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample34">
+                  <label class="mdl-textfield__label" for="sample34">Feldname </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample35">
+                  <label class="mdl-textfield__label" for="sample35">Feldbesitzer</label>
+                </div>
+              </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample36">
+                <label class="mdl-textfield__label" for="sample36">Feldgröße in ha</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </form>
+
+<h3>Fahrer</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample37">
+                <label class="mdl-textfield__label" for="sample37">Fahrer</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample38">
+                <label class="mdl-textfield__label" for="sample38">Beifahrer</label>
+                </div>
+            </form>
+
+<h3>Bedingungen</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample39">
+                <label class="mdl-textfield__label" for="sample39">Wetterbedingungen</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample40" ></textarea>
+                <label class="mdl-textfield__label" for="sample40">Sonstiges</label>
+                </div>
+            </form>
+  
+<h3>Proben</h3> 
+<p>Ort/Anzahl/Menge etc.</p>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample13" ></textarea>
+                <label class="mdl-textfield__label" for="sample13">Text einfügen</label>
+                </div>
+            </form>
+
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-4">
+        <div class="page-content">
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample41">
+                  <label class="mdl-textfield__label" for="sample41">Datum </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample42">
+                  <label class="mdl-textfield__label" for="sample42">Startzeit</label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample43">
+                  <label class="mdl-textfield__label" for="sample43">Endzeit</label>
+                </div>
+              </form>
+
+
+<h3> Betriebsdaten</h3>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample44">
+                  <label class="mdl-textfield__label" for="sample44">Feldname </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample45">
+                  <label class="mdl-textfield__label" for="sample45">Feldbesitzer</label>
+                </div>
+              </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample46">
+                <label class="mdl-textfield__label" for="sample46">Feldgröße in ha</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </form>
+
+<h3>Fahrer</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample47">
+                <label class="mdl-textfield__label" for="sample47">Fahrer</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample48">
+                <label class="mdl-textfield__label" for="sample48">Beifahrer</label>
+                </div>
+            </form>
+
+<h3>Bedingungen</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample49">
+                <label class="mdl-textfield__label" for="sample49">Wetterbedingungen</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample50" ></textarea>
+                <label class="mdl-textfield__label" for="sample50">Sonstiges</label>
+                </div>
+            </form>
+
+<h3>Proben</h3> 
+<p>Ort/Anzahl/Menge etc.</p>
+            
+                        <form action="#">
+                            <div class="mdl-textfield mdl-js-textfield">
+                            <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample14" ></textarea>
+                            <label class="mdl-textfield__label" for="sample14">Text einfügen</label>
+                            </div>
+                        </form>
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-5">
+        <div class="page-content">
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample51">
+                  <label class="mdl-textfield__label" for="sample51">Datum </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample52">
+                  <label class="mdl-textfield__label" for="sample52">Startzeit</label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample53">
+                  <label class="mdl-textfield__label" for="sample53">Endzeit</label>
+                </div>
+              </form>
+
+
+<h3> Betriebsdaten</h3>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample54">
+                  <label class="mdl-textfield__label" for="sample54">Feldname </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample55">
+                  <label class="mdl-textfield__label" for="sample55">Feldbesitzer</label>
+                </div>
+              </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample56">
+                <label class="mdl-textfield__label" for="sample56">Feldgröße in ha</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </form>
+
+<h3>Fahrer</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample57">
+                <label class="mdl-textfield__label" for="sample57">Fahrer</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample58">
+                <label class="mdl-textfield__label" for="sample58">Beifahrer</label>
+                </div>
+            </form>
+
+<h3>Bedingungen</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample59">
+                <label class="mdl-textfield__label" for="sample59">Wetterbedingungen</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample60" ></textarea>
+                <label class="mdl-textfield__label" for="sample60">Sonstiges</label>
+                </div>
+            </form>
+  
+<h3>Proben</h3> 
+<p>Ort/Anzahl/Menge etc.</p>
+            
+                        <form action="#">
+                            <div class="mdl-textfield mdl-js-textfield">
+                            <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample15" ></textarea>
+                            <label class="mdl-textfield__label" for="sample15">Text einfügen</label>
+                            </div>
+                        </form>
+
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-6">
+        <div class="page-content">
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample61">
+                  <label class="mdl-textfield__label" for="sample61">Datum </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample62">
+                  <label class="mdl-textfield__label" for="sample62">Startzeit</label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample63">
+                  <label class="mdl-textfield__label" for="sample63">Endzeit</label>
+                </div>
+              </form>
+
+
+<h3> Betriebsdaten</h3>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample64">
+                  <label class="mdl-textfield__label" for="sample64">Feldname </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample65">
+                  <label class="mdl-textfield__label" for="sample65">Feldbesitzer</label>
+                </div>
+              </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample66">
+                <label class="mdl-textfield__label" for="sample66">Feldgröße in ha</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </form>
+
+<h3>Fahrer</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample67">
+                <label class="mdl-textfield__label" for="sample67">Fahrer</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample68">
+                <label class="mdl-textfield__label" for="sample68">Beifahrer</label>
+                </div>
+            </form>
+
+<h3>Bedingungen</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample69">
+                <label class="mdl-textfield__label" for="sample69">Wetterbedingungen</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample70" ></textarea>
+                <label class="mdl-textfield__label" for="sample70">Sonstiges</label>
+                </div>
+            </form>
+  
+<h3>Proben</h3> 
+<p>Ort/Anzahl/Menge etc.</p>
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample16" ></textarea>
+                <label class="mdl-textfield__label" for="sample16">Text einfügen</label>
+                </div>
+            </form>
+
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-7">
+        <div class="page-content">
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample71">
+                  <label class="mdl-textfield__label" for="sample71">Datum </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample72">
+                  <label class="mdl-textfield__label" for="sample72">Startzeit</label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample73">
+                  <label class="mdl-textfield__label" for="sample73">Endzeit</label>
+                </div>
+              </form>
+
+
+<h3> Betriebsdaten</h3>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample74">
+                  <label class="mdl-textfield__label" for="sample74">Feldname </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample75">
+                  <label class="mdl-textfield__label" for="sample75">Feldbesitzer</label>
+                </div>
+              </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample76">
+                <label class="mdl-textfield__label" for="sample76">Feldgröße in ha</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </form>
+
+<h3>Fahrer</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample77">
+                <label class="mdl-textfield__label" for="sample77">Fahrer</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample78">
+                <label class="mdl-textfield__label" for="sample78">Beifahrer</label>
+                </div>
+            </form>
+
+<h3>Bedingungen</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample79">
+                <label class="mdl-textfield__label" for="sample79">Wetterbedingungen</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample80" ></textarea>
+                <label class="mdl-textfield__label" for="sample80">Sonstiges</label>
+                </div>
+            </form>
+  
+<h3>Proben</h3> 
+<p>Ort/Anzahl/Menge etc.</p>
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample17" ></textarea>
+                <label class="mdl-textfield__label" for="sample17">Text einfügen</label>
+                </div>
+            </form>
+
+        </div>
+      </section>
+
+      <section class="mdl-layout__tab-panel" id="scroll-tab-8">
+        <div class="page-content">
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample81">
+                  <label class="mdl-textfield__label" for="sample81">Datum </label>
+                </div>
+              </form>
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample82">
+                  <label class="mdl-textfield__label" for="sample82">Startzeit</label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample83">
+                  <label class="mdl-textfield__label" for="sample83">Endzeit</label>
+                </div>
+              </form>
+
+
+<h3> Betriebsdaten</h3>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample84">
+                  <label class="mdl-textfield__label" for="sample84">Feldname </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample85">
+                  <label class="mdl-textfield__label" for="sample85">Feldbesitzer</label>
+                </div>
+              </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample86">
+                <label class="mdl-textfield__label" for="sample86">Feldgröße in ha</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </form>
+
+<h3>Fahrer</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample87">
+                <label class="mdl-textfield__label" for="sample87">Fahrer</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample88">
+                <label class="mdl-textfield__label" for="sample88">Beifahrer</label>
+                </div>
+            </form>
+
+<h3>Bedingungen</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample89">
+                <label class="mdl-textfield__label" for="sample89">Wetterbedingungen</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample90" ></textarea>
+                <label class="mdl-textfield__label" for="sample90">Sonstiges</label>
+                </div>
+            </form>
+  
+<h3>Proben</h3> 
+<p>Ort/Anzahl/Menge etc.</p>
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample11" ></textarea>
+                <label class="mdl-textfield__label" for="sample11">Text einfügen</label>
+                </div>
+            </form>
+        </div>
+      </section>
+
+      <section class="mdl-layout__tab-panel" id="scroll-tab-9">
+        <div class="page-content"><form action="#">
+
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample91">
+                  <label class="mdl-textfield__label" for="sample91">Datum </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample92">
+                  <label class="mdl-textfield__label" for="sample92">Startzeit</label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample93">
+                  <label class="mdl-textfield__label" for="sample93">Endzeit</label>
+                </div>
+              </form>
+
+
+<h3> Betriebsdaten</h3>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample94">
+                  <label class="mdl-textfield__label" for="sample94">Feldname </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample95">
+                  <label class="mdl-textfield__label" for="sample95">Feldbesitzer</label>
+                </div>
+              </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample96">
+                <label class="mdl-textfield__label" for="sample96">Feldgröße in ha</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </form>
+
+<h3>Fahrer</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample97">
+                <label class="mdl-textfield__label" for="sample97">Fahrer</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample98">
+                <label class="mdl-textfield__label" for="sample98">Beifahrer</label>
+                </div>
+            </form>
+
+<h3>Bedingungen</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample99">
+                <label class="mdl-textfield__label" for="sample99">Wetterbedingungen</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample100" ></textarea>
+                <label class="mdl-textfield__label" for="sample100">Sonstiges</label>
+                </div>
+            </form>
+  
+<h3>Proben</h3> 
+<p>Ort/Anzahl/Menge etc.</p>
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample19" ></textarea>
+                <label class="mdl-textfield__label" for="sample19">Text einfügen</label>
+                </div>
+            </form>        
+        </div>
+      </section>
+
+      <section class="mdl-layout__tab-panel" id="scroll-tab-10">
+        <div class="page-content">
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample101">
+                  <label class="mdl-textfield__label" for="sample101">Datum </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample102">
+                  <label class="mdl-textfield__label" for="sample102">Startzeit</label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample103">
+                  <label class="mdl-textfield__label" for="sample103">Endzeit</label>
+                </div>
+              </form>
+
+
+<h3> Betriebsdaten</h3>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample104">
+                  <label class="mdl-textfield__label" for="sample104">Feldname </label>
+                </div>
+              </form>
+
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample105">
+                  <label class="mdl-textfield__label" for="sample105">Feldbesitzer</label>
+                </div>
+              </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample106">
+                <label class="mdl-textfield__label" for="sample106">Feldgröße in ha</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </form>
+
+<h3>Fahrer</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample107">
+                <label class="mdl-textfield__label" for="sample107">Fahrer</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample108">
+                <label class="mdl-textfield__label" for="sample108">Beifahrer</label>
+                </div>
+            </form>
+
+<h3>Bedingungen</h3>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample109">
+                <label class="mdl-textfield__label" for="sample109">Wetterbedingungen</label>
+                </div>
+            </form>
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample110" ></textarea>
+                <label class="mdl-textfield__label" for="sample110">Sonstiges</label>
+                </div>
+            </form>
+  
+<h3>Proben</h3> 
+<p>Ort/Anzahl/Menge etc.</p>
+            
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample11" ></textarea>
+                <label class="mdl-textfield__label" for="sample11">Text einfügen</label>
+                </div>
+             </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
